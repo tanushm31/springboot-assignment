@@ -1,6 +1,23 @@
 server:
   port: 8080
+
 spring:
-  h2.console.enabled: true
+  datasource:
+    url: jdbc:h2:mem:demo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
   jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true # run data.sql AFTER JPA creates tables
     open-in-view: false
+    properties:
+      hibernate.format_sql: true
+  sql:
+    init:
+      mode: always # always run data.sql in dev
+
+  h2:
+    console:
+      enabled: true
